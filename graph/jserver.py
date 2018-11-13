@@ -19,7 +19,7 @@ class ServerServices(object):
     return ''.join(reversed(list(txt)))
 
   @request
-  def incTree(self, txt):
+  def incTree(self, txt): #get tree, increment, encode and return
     root = localDemo.buildFromJson(txt)
     root.show()
     node.increment(root)

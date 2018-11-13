@@ -17,15 +17,12 @@ s.connect(('localhost', 50001))
 rpc = JSONRpc(s,framing_cls=JSONFramingNone)
 server = rpc.get_peer_proxy()
 # Execute in server:
-#result = server.swapper('Hello World!')
-# "!dlroW olleH"
-#print(result)
-
-#print(server.nop({1:[2,3]}))
 root = localDemo.createTree()
 root.show()
 jStr = localDemo.jRequest(root)
+#increases tree from the server
 jStr = server.incTree(jStr)
+#build new tree
 root = localDemo.buildFromJson(jStr)
 print("printing tree returned from server")
 root.show()
