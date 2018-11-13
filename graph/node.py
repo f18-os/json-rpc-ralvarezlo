@@ -20,7 +20,7 @@ def outDict(graph, myDict = {}):
         childArr[i] = graph.children[i].name
         myDict = outDict(graph.children[i], myDict)
 
-    auxArr = {"value":graph.val, "children":childArr}
+    auxArr = {"val":graph.val, "children":childArr}
     myDict.update({graph.name:auxArr})
     return myDict
 
@@ -29,4 +29,6 @@ def doRequest(graph):
     myDict = outDict(graph)
 
     file = open("json.request", "w")
-    file.write(json.dumps(myDict))
+    jString = json.dumps(myDict)
+    file.write(jString)
+    return jString
