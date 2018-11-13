@@ -14,3 +14,6 @@ increment(root)
 print("graph after increment")
 root.show()
 
+print("Doing Request")
+doRequest(root)
+print("Request Done")

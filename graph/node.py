@@ -1,3 +1,4 @@
+import json
 class node:
     def __init__(self, name, children = []):
         self.name = name
@@ -5,7 +6,7 @@ class node:
         self.val = 0
     def show(self, level=0):
         print("%s%s val=%d:" % (level*"  ", self.name, self.val))
-        for c in self.children: 
+        for c in self.children:
             c.show(level + 1)
 
 def increment(graph):
@@ -13,3 +14,19 @@ def increment(graph):
     for c in graph.children:
         increment(c)
 
+def outDict(graph, myDict = {}):
+    childArr = {}
+    for i in range(len(graph.children)):
+        childArr[i] = graph.children[i].name
+        myDict = outDict(graph.children[i], myDict)
+
+    auxArr = {"value":graph.val, "children":childArr}
+    myDict.update({graph.name:auxArr})
+    return myDict
+
+
+def doRequest(graph):
+    myDict = outDict(graph)
+
+    file = open("json.request", "w")
+    file.write(json.dumps(myDict))
